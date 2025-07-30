@@ -35,11 +35,20 @@ const fileLabels: Record<string, string> = {
   'Portfolio.pdf': 'Portfolio',
 };
 
-// Files that should be shown as images instead of PDFs
-const fileTypes: Record<string, string> = {
-  'PLATE100 CONDO PRINT FINAL FINAL.pdf': '/Screenshot 2025-07-30 133640.png',
-  'PL200 FINAL.pdf': '/Screenshot 2025-07-30 133709.png',
+const fileTypes: Record<
+  string,
+  { image: string; externalUrl?: string }
+> = {
+  'PLATE100 CONDO PRINT FINAL FINAL.pdf': {
+    image: '/Screenshot 2025-07-30 133640.png',
+    externalUrl: 'https://drive.google.com/file/d/1JvPhrrrXaSHabVdg1NINnQCq3tBAeA-Q/view',
+  },
+  'PL200 FINAL.pdf': {
+    image: '/Screenshot 2025-07-30 133709.png',
+    externalUrl: 'https://drive.google.com/file/d/1u734OCBuSDHNfFCLMty1QBPqBu4wOicw/view',
+  },
 };
+
 
 export default function PDFGallery({ files }: { files: string[] }) {
   const plugin = defaultLayoutPlugin();
@@ -77,17 +86,39 @@ export default function PDFGallery({ files }: { files: string[] }) {
         ))}
       </div>
 
-      {/* Viewer Section */}
       <div style={{ height: '600px', marginTop: '20px', textAlign: 'center' }}>
-        {isImage ? (
-          <img
-            src={imageUrl}
-            alt={fileLabels[activeFile]}
-            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
-          />
+        {fileTypes[activeFile] ? (
+          <>
+            <img
+              src={fileTypes[activeFile].image}
+              alt={fileLabels[activeFile]}
+              style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+            />
+            {fileTypes[activeFile].externalUrl && (
+              <div style={{ marginTop: '12px' }}>
+                <a
+                  href={fileTypes[activeFile].externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-block',
+                    padding: '10px 20px',
+                    backgroundColor: '#2563EB',
+                    color: '#fff',
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                    fontWeight: '500',
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+                  }}
+                >
+                  View Full PDF on Google Drive
+                </a>
+              </div>
+            )}
+          </>
         ) : (
           <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
-            <Viewer fileUrl={fileUrl} plugins={[plugin]} />
+            <Viewer fileUrl={`/pdfs/${activeFile}`} plugins={[plugin]} />
           </Worker>
         )}
 
@@ -95,6 +126,7 @@ export default function PDFGallery({ files }: { files: string[] }) {
           {fileLabels[activeFile] || activeFile}
         </p>
       </div>
+
     </div>
   );
 }
