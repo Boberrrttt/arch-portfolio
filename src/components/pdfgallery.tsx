@@ -21,7 +21,6 @@ const customOrder = [
   'Portfolio.pdf',
 ];
 
-// Labels for display
 const fileLabels: Record<string, string> = {
   'png2pdf+9.pdf': 'Esquisse 100 Condominium Floor Plan',
   '_DESIGN+7-CONDO_RESEARCH+PL100+(1).pdf': 'RESEARCH 100 Condominium',
@@ -49,26 +48,24 @@ const fileTypes: Record<
   },
 };
 
-
 export default function PDFGallery({ files }: { files: string[] }) {
   const plugin = defaultLayoutPlugin();
   const [activeFile, setActiveFile] = useState(customOrder[0]);
-
-  // Always use customOrder as the source of truth for ordering
-  const orderedFiles = customOrder;
+  const [isLoading, setIsLoading] = useState(true);
 
   const isImage = !!fileTypes[activeFile];
-  const fileUrl = `/pdfs/${activeFile}`;
-  const imageUrl = fileTypes[activeFile];
 
   return (
     <div>
       {/* File selection buttons */}
       <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '20px' }}>
-        {orderedFiles.map((file) => (
+        {customOrder.map((file) => (
           <button
             key={file}
-            onClick={() => setActiveFile(file)}
+            onClick={() => {
+              setActiveFile(file);
+              setIsLoading(true);
+            }}
             style={{
               padding: '10px 16px',
               borderRadius: '8px',
@@ -86,15 +83,27 @@ export default function PDFGallery({ files }: { files: string[] }) {
         ))}
       </div>
 
-      <div style={{ height: '600px', marginTop: '20px', textAlign: 'center' }}>
-        {fileTypes[activeFile] ? (
+      <div style={{ height: '600px', marginTop: '20px', textAlign: 'center', position: 'relative' }}>
+        {isImage ? (
           <>
+            {isLoading && (
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                <div className="spinner" />
+              </div>
+            )}
             <img
               src={fileTypes[activeFile].image}
               alt={fileLabels[activeFile]}
-              style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+              style={{
+                maxHeight: '100%',
+                maxWidth: '100%',
+                objectFit: 'contain',
+                display: isLoading ? 'none' : 'block',
+              }}
+              onLoad={() => setIsLoading(false)}
+              onError={() => setIsLoading(false)}
             />
-            {fileTypes[activeFile].externalUrl && (
+            {fileTypes[activeFile].externalUrl && !isLoading && (
               <div style={{ marginTop: '12px' }}>
                 <a
                   href={fileTypes[activeFile].externalUrl}
@@ -127,6 +136,26 @@ export default function PDFGallery({ files }: { files: string[] }) {
         </p>
       </div>
 
+      {/* Spinner CSS */}
+      <style jsx>{`
+        .spinner {
+          border: 6px solid #f3f3f3;
+          border-top: 6px solid #2563EB;
+          border-radius: 50%;
+          width: 48px;
+          height: 48px;
+          animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
     </div>
   );
 }
