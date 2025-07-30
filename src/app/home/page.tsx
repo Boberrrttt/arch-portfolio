@@ -18,8 +18,17 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* About Section */}
+      {/* Portfolio Section */}
       <section
+        id="projects"
+        className="px-6 py-24 max-w-6xl mx-auto border-y border-purple-300 mt-16"
+      >
+        <h2 className="text-4xl font-bold mb-12 text-center text-purple-900">Projects</h2>
+        <PDFGalleryWrapper files={files} />
+      </section>
+      
+       {/* About Section */}
+       <section
         id="about"
         className="px-6 py-24 max-w-5xl mx-auto bg-purple-100/60 rounded-2xl shadow-md mt-10 flex flex-col md:flex-row items-center gap-10"
       >
@@ -38,15 +47,6 @@ export default function HomePage() {
             and function into every space I imagine.
           </p>
         </div>
-      </section>
-
-      {/* Portfolio Section */}
-      <section
-        id="projects"
-        className="px-6 py-24 max-w-6xl mx-auto border-y border-purple-300 mt-16"
-      >
-        <h2 className="text-4xl font-bold mb-12 text-center text-purple-900">Projects</h2>
-        <PDFGalleryWrapper files={files} />
       </section>
 
       {/* Contact Section */}
