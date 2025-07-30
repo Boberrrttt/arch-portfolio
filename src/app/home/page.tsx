@@ -9,8 +9,8 @@ export default function HomePage() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Hazel Louise P. Acurantes</h1>
-      <h1>BSARCH</h1>
+      <h1 className='text-2xl font-bold'>Hazel Louise P. Acurantes</h1>
+      <h1 className='text-2xl font-bold mb-12'>BSARCH</h1>
       <PDFGalleryWrapper files={files} />
     </div>
   );
