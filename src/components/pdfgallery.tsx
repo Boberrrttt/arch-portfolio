@@ -31,7 +31,7 @@ const fileLabels: Record<string, string> = {
   'PL200_CS.pdf': 'CASE STUDY 200 Domestic Airport',
   'Aquagon-FINAL Competition.pdf': 'Esquise 200 Competition',
   'PL200 FINAL.pdf': 'Plate 200 Final - Domestic Airport Part (Image)',
-  'Portfolio.pdf': 'Portfolio',
+  'Portfolio.pdf': 'Portfolio (Image)',
 };
 
 const fileTypes: Record<
@@ -45,6 +45,10 @@ const fileTypes: Record<
   'PL200 FINAL.pdf': {
     image: '/Screenshot 2025-07-30 133709.png',
     externalUrl: 'https://drive.google.com/file/d/1u734OCBuSDHNfFCLMty1QBPqBu4wOicw/view',
+  },
+  'Portfolio.pdf': {
+    image: '/Screenshot 2025-07-31 073143.png',
+    externalUrl: 'https://drive.google.com/file/d/1gf4uGCzJ4p1RhetnehEVToahgJKnDW0V/view',
   },
 };
 
