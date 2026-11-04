@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal website of Raphael Maurin." />
+  <title>Raphael Maurin</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #1e293b;
+      --card: #16213a;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-strong: #0ea5e9;
+      --facebook: #1877f2;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top, var(--bg-soft) 0%, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent-strong);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    nav .brand {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1.25rem;
+      list-style: none;
+      font-size: 0.95rem;
+    }
+
+    nav ul a {
+      color: var(--muted);
+    }
+
+    nav ul a:hover {
+      color: var(--text);
+    }
+
+    main {
+      width: min(960px, 92vw);
+      margin: 0 auto;
+      padding: 4rem 0 3rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      padding: 2.5rem;
+      background: var(--card);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--bg);
+      background: linear-gradient(135deg, var(--accent), #a78bfa);
+      box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.15);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero .tagline {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--facebook);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .button:hover {
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(24, 119, 242, 0.35);
+    }
+
+    .button svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    section {
+      margin-top: 3.5rem;
+    }
+
+    section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    section h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.35rem;
+      bottom: 0.35rem;
+      width: 4px;
+      border-radius: 4px;
+      background: var(--accent);
+    }
+
+    section p {
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .card {
+      padding: 1.5rem;
+      background: var(--card);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: var(--radius);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+      }
+
+      nav ul {
+        gap: 0.9rem;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="#top">Raphael Maurin</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#highlights">Highlights</a></li>
+      <li><a href="#connect">Connect</a></li>
+    </ul>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="avatar" aria-hidden="true">RM</div>
+      <div>
+        <h1>Hi, I'm Raphael Maurin</h1>
+        <p class="tagline">Welcome to my personal corner of the web.</p>
+        <a class="button" href="https://www.facebook.com/maurinraphael01" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07c0 6.02 4.39 11.02 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.88v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.09 24 18.09 24 12.07z"/>
+          </svg>
+          Find me on Facebook
+        </a>
+      </div>
+    </header>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        I'm Raphael, and this page is a simple place to introduce myself and share where you can
+        reach me. I enjoy connecting with people, exploring new ideas, and keeping in touch with
+        friends and family.
+      </p>
+    </section>
+
+    <section id="highlights">
+      <h2>Highlights</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Community</h3>
+          <p>I value genuine connections and enjoy being part of the conversations happening around me.</p>
+        </article>
+        <article class="card">
+          <h3>Interests</h3>
+          <p>Always curious, always learning. I like discovering new things and sharing them with others.</p>
+        </article>
+        <article class="card">
+          <h3>Updates</h3>
+          <p>For my latest posts, photos, and moments, follow along on my Facebook profile.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="connect">
+      <h2>Connect</h2>
+      <p>
+        The best way to reach me is through Facebook. Send me a message or follow my profile at
+        <a href="https://www.facebook.com/maurinraphael01" target="_blank" rel="noopener noreferrer">facebook.com/maurinraphael01</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Raphael Maurin
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
